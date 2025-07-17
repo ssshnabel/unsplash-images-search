@@ -1,5 +1,6 @@
 export const locales = {
-	searchBetweenImages: "Поиск среди изображений",
-	search: "Поиск",
-	searchError: "Не удалось выполнить поиск. Попробуйте еще раз"
+	searchPlaceholder: "Телефоны, яблоки, груши",
+	search: "Искать",
+	clearSearch: "Очистить поисковую строку",
+	searchError: "К сожалению, поиск не дал результатов"
 }

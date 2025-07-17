@@ -1,7 +1,7 @@
 export const baseUrl = `https://api.unsplash.com`
 
 export const endpoints = {
-	searchPhotos: `${baseUrl}/search/photos?per_page=30`
+	searchPhotos: `${baseUrl}/search/photos?per_page=10`
 }
 
 export const queryHeaders = {

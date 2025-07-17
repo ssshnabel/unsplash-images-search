@@ -6,8 +6,16 @@ import {Image} from "@/app/models/image"
 import {useHandleSearch} from "@/app/hooks/useHandleSearch"
 import {locales as l} from "@/app/locales/image"
 import ImageWithLoader from "@/app/components/ImageWithLoader"
+import styles from "../styles/ImageSearch.module.scss"
+import ImageItem from "next/image"
+import searchIcon from "../assets/searchIcon.svg"
+import clearSearchIcon from "../assets/clearSearchIcon.svg"
+import cn from "classnames"
 
-/* TODO: стили (веб и сафари ios), i18next - локализацию, тесты */
+const IMAGE_WIDTH = 204.17
+const IMAGE_HEIGHT = 204
+
+/* TODO: стили (веб и сафари ios), тесты */
 
 const ImageSearch: React.FC = () => {
 	const [query, setQuery] = useState<string>("")
@@ -20,7 +28,7 @@ const ImageSearch: React.FC = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			const isBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 20
+			const isBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
 			if (isBottom && !isLoading) {
 				onChangePagination()
 			}
@@ -42,7 +50,7 @@ const ImageSearch: React.FC = () => {
 	const handleSearchSubmit = useCallback(() => {
 		setPage(1)
 		searchImages()
-	}, [searchImages])
+	}, [query, searchImages])
 
 	const onChangePagination = () => {
 		if (!isLoading) {
@@ -51,41 +59,83 @@ const ImageSearch: React.FC = () => {
 	}
 
 	useEffect(() => {
-		if (page > 1) {
+		if (page > 1 && query.length) {
 			searchImages()
 		}
 	}, [page])
 
+	const handleClearInput = () => {
+		setQuery("")
+		setImages([])
+	}
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			handleSearchSubmit()
+		}
+	}
+
+	const hasSearchResults = images.length || error
+
 	return (
-		<div>
-			<form>
-				{/* TODO: добавить очистку поля и иконку поиска */}
-				<input
-					type="text"
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-					placeholder={l.searchBetweenImages}
-					required
-				/>
-				<button type="submit" disabled={isLoading} onClick={handleSearchSubmit}>
-					{isLoading ? `${l.search}...` : l.search}
-				</button>
-			</form>
-
-			{error && <div>{error}</div>}
-
-			<div style={{display: "flex", justifyContent: "center", flexWrap: "wrap", flex: "1 1", maxWidth: "100vw"}}>
-				{images.map((image) => (
-					<div key={image.id} onClick={() => setSelectedImage(image)} style={{margin: "4px 8px 0 0"}}>
+		<div className={cn(styles.imageSearch__wrapper, hasSearchResults && styles.imageSearch__wrapper_shifted)}>
+			<div className={cn(styles.imageSearch__search, hasSearchResults && styles.imageSearch__search_shifted)}>
+				<div className={cn(styles.imageSearch__searchContainer, hasSearchResults && styles.imageSearch__searchContainer_shifted)}>
+					<div className={styles.imageSearch__searchInput}>
+						<span className={styles.imageSearch__searchIcon}>
+							<ImageItem
+								src={searchIcon}
+								alt={l.search}
+								width={19}
+								height={19}
+							/>
+						</span>
+						<input
+							className={styles.imageSearch__input}
+							type="text"
+							value={query}
+							onChange={(e) => setQuery(e.target.value)}
+							placeholder={l.searchPlaceholder}
+							required
+							onKeyDown={handleKeyDown}
+						/>
+						{query && (
+							<button className={styles.imageSearch__clearSearchIcon} onClick={handleClearInput}>
+								<ImageItem
+									src={clearSearchIcon}
+									alt={l.clearSearch}
+									width={19}
+									height={19}
+								/>
+							</button>
+						)}
+					</div>
+					<div className={styles.imageSearch__submitButtonContainer}>
+						<button type="submit" className={styles.imageSearch__submitButton} disabled={isLoading} onClick={handleSearchSubmit}>
+							{l.search}
+						</button>
+					</div>
+				</div>
+				{error && (
+					<div className={styles.imageSearch__searchError}>{error}</div>
+				)}
+			</div>
+			
+			<div className={styles.imageSearch__images}>
+				<div className={styles.imageSearch__imagesContainer}>
+					{images.map((image) => (
 						<ImageWithLoader
 							src={image.urls.small}
 							alt={image.alt_description}
-							width={204.17}
-							height={204}
-							loading={"lazy"}
+							key={image.id}
+							className={styles.imageSearch__image}
+							width={IMAGE_WIDTH}
+							height={IMAGE_HEIGHT}
+							onClick={() => setSelectedImage(image)}
 						/>
-					</div>
-				))}
+					
+					))}
+				</div>
 			</div>
 
 			<ModalWindow image={selectedImage} alt={query} onClose={() => setSelectedImage(null)} />

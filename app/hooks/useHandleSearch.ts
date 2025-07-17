@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import {Image} from "@/app/models/image"
 import {getImages} from "@/app/pages/api/getImages"
+import {locales as l} from "@/app/locales/image"
 
 export const useHandleSearch = (query: string, page: number) => {
 	const [searchedImages, setSearchedImages] = useState<Image[]>([])
