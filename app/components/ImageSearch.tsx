@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {memo, useCallback, useEffect, useState} from 'react'
 import ModalWindow from './ModalWindow'
 import {Image} from "@/app/models/image"
 import {useHandleSearch} from "@/app/hooks/useHandleSearch"
@@ -25,6 +25,7 @@ const ImageSearch: React.FC = () => {
 	const [selectedImage, setSelectedImage] = useState<Image | null>(null)
 
 	const {searchImages, searchedImages, isLoading, error} = useHandleSearch(query, page)
+	const hasSearchResults = images.length || error
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -75,8 +76,6 @@ const ImageSearch: React.FC = () => {
 		}
 	}
 
-	const hasSearchResults = images.length || error
-
 	return (
 		<div className={cn(styles.imageSearch__wrapper, hasSearchResults && styles.imageSearch__wrapper_shifted)}>
 			<div className={cn(styles.imageSearch__search, hasSearchResults && styles.imageSearch__search_shifted)}>
@@ -120,27 +119,28 @@ const ImageSearch: React.FC = () => {
 					<div className={styles.imageSearch__searchError}>{error}</div>
 				)}
 			</div>
-			
-			<div className={styles.imageSearch__images}>
-				<div className={styles.imageSearch__imagesContainer}>
-					{images.map((image) => (
-						<ImageWithLoader
-							src={image.urls.small}
-							alt={image.alt_description}
-							key={image.id}
-							className={styles.imageSearch__image}
-							width={IMAGE_WIDTH}
-							height={IMAGE_HEIGHT}
-							onClick={() => setSelectedImage(image)}
-						/>
-					
-					))}
-				</div>
-			</div>
 
+			{images && (
+				<div className={styles.imageSearch__images}>
+					<div className={styles.imageSearch__imagesContainer}>
+						{images.map((image) => (
+							<ImageWithLoader
+								src={image.urls.small}
+								alt={image.alt_description ?? query}
+								key={image.id}
+								className={styles.imageSearch__image}
+								width={IMAGE_WIDTH}
+								height={IMAGE_HEIGHT}
+								onClick={() => setSelectedImage(image)}
+							/>
+
+						))}
+					</div>
+				</div>
+			)}
 			<ModalWindow image={selectedImage} alt={query} onClose={() => setSelectedImage(null)} />
 		</div>
 	)
 }
 
-export default ImageSearch
+export default memo(ImageSearch)

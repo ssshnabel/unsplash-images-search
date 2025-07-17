@@ -1,0 +1,128 @@
+.imageSearch {
+    &__wrapper {
+        padding: 0 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        &_shifted {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    }
+
+    &__search {
+        height: 340px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        &_shifted {
+            height: 104px;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+    }
+
+    &__searchContainer {
+        display: flex;
+        justify-content: space-between;
+        width: 512px;
+        margin-top: 40px;
+        margin-bottom: 16px;
+
+        &_shifted {
+            margin-bottom: 46px;
+        }
+    }
+
+    &__searchInput {
+        position: relative;
+        width: 420px;
+        height: 48px;
+    }
+
+    &__searchIcon {
+        position: absolute;
+        left: 10px;
+        top: 13px;
+    }
+
+    &__input {
+        width: 83%;
+        border: 0;
+        border-radius: 12px;
+        padding: 14.5px 36px;
+        background-color: #E6E6E6;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__clearSearchIcon {
+        position: absolute;
+        padding: 0;
+        right: 10px;
+        top: 13px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    &__searchError {
+        color: #787878;
+        font-size: 16px;
+
+    }
+
+    &__images {
+        display: flex;
+        max-width: 1400px;
+        min-height: 710px;
+        align-items: flex-start;
+    }
+
+    &__imagesContainer {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex: 1 1;
+    }
+
+    &__image {
+        margin: 4px 8px 0 0;
+    }
+
+    &__submitButtonContainer {
+        width: 84px;
+        height: 48px;
+    }
+
+    &__submitButton {
+        border-radius: 12px;
+        padding: 14px 16px;
+        background-color: #EB0C0C;
+        color: white;
+        border: 0;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            background-color: #C30000;
+        }
+    }
+}
+
