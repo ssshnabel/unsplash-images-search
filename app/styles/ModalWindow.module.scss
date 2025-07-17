@@ -1,0 +1,41 @@
+.modalWindow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+  max-height: 100vh;
+  border: 0;
+  outline: 0;
+  background-color: rgba(#0000004D, 0.3);
+
+
+  &__image {
+    max-height: 767.47px;
+    max-width: 760px;
+
+    img {
+      max-height: 767.47px;
+      max-width: 760px;
+    }
+  }
+
+  &__closeButton {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    top: 24px;
+    right: 24px;
+    background: white;
+    border: 0;
+    outline: none;
+  }
+}

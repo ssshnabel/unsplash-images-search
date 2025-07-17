@@ -11,13 +11,14 @@ import ImageItem from "next/image"
 import searchIcon from "../assets/searchIcon.svg"
 import clearSearchIcon from "../assets/clearSearchIcon.svg"
 import cn from "classnames"
+import {v4 as uuidv4} from "uuid"
 
 const IMAGE_WIDTH = 204.17
 const IMAGE_HEIGHT = 204
 
-/* TODO: стили (веб и сафари ios), тесты */
+/* TODO: стили (сафари ios), тесты */
 
-const ImageSearch: React.FC = () => {
+const ImageSearch = () => {
 	const [query, setQuery] = useState<string>("")
 	const [page, setPage] = useState<number>(1)
 
@@ -67,7 +68,6 @@ const ImageSearch: React.FC = () => {
 
 	const handleClearInput = () => {
 		setQuery("")
-		setImages([])
 	}
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -120,14 +120,14 @@ const ImageSearch: React.FC = () => {
 				)}
 			</div>
 
-			{images && (
+			{Boolean(images.length) && (
 				<div className={styles.imageSearch__images}>
 					<div className={styles.imageSearch__imagesContainer}>
 						{images.map((image) => (
 							<ImageWithLoader
 								src={image.urls.small}
 								alt={image.alt_description ?? query}
-								key={image.id}
+								key={uuidv4()}
 								className={styles.imageSearch__image}
 								width={IMAGE_WIDTH}
 								height={IMAGE_HEIGHT}
@@ -138,7 +138,7 @@ const ImageSearch: React.FC = () => {
 					</div>
 				</div>
 			)}
-			<ModalWindow image={selectedImage} alt={query} onClose={() => setSelectedImage(null)} />
+			<ModalWindow image={selectedImage} onClose={() => setSelectedImage(null)} />
 		</div>
 	)
 }

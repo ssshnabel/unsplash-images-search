@@ -1,28 +1,41 @@
 import React from 'react'
 import Modal from 'react-modal'
-import ImageItem from 'next/image'
 import {Image} from "@/app/models/image"
+import styles from "../styles/ModalWindow.module.scss"
+import closeModalIcon from "../assets/closeModalIcon.svg"
+import ImageItem from "next/image"
+import { locales as l } from "@/app/locales/image"
 
 interface ModalWindowProps {
     image: Image | null
-    alt: string
     onClose: () => void
 }
 
-/*TODO: добавить стили (веб и сафари ios), тесты */
+/*TODO: добавить стили (сафари ios), тесты */
 
-const ModalWindow: React.FC<ModalWindowProps> = ({ image, onClose, alt }) => {
+const ModalWindow = (props: ModalWindowProps) => {
+	const {image, onClose} = props
+
 	return (
-		<Modal isOpen={!!image} onRequestClose={onClose} ariaHideApp={false}>
-			{image && (<div>
-				<button onClick={onClose}>Закрыть</button>
-				<ImageItem
-					src={image.urls.regular}
-					alt={alt}
-					width={300}
-					height={100}
-				/>
-			</div>
+		<Modal isOpen={!!image} onRequestClose={onClose} ariaHideApp={false} className={styles.modalWindow}>
+			{image && (
+				<>
+					<div className={styles.modalWindow__image}>
+						<img
+							src={image.urls.regular}
+							alt={image.alt_description}
+							loading={"eager"}
+						/>
+					</div>
+					<button className={styles.modalWindow__closeButton} onClick={onClose}>
+						<ImageItem
+							src={closeModalIcon}
+							alt={l.closeModal}
+							width={14}
+							height={14}
+						/>
+					</button>
+				</>
 			)}
 		</Modal>
 	)

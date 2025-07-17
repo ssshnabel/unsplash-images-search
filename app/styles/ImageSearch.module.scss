@@ -1,12 +1,14 @@
 .imageSearch {
     &__wrapper {
-        padding: 0 80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        height: calc(100vh - 20px);
+        padding: 0 80px;
 
         &_shifted {
+            height: auto;
             justify-content: flex-start;
             align-items: flex-start;
         }
@@ -19,7 +21,7 @@
         justify-content: flex-end;
 
         &_shifted {
-            height: 104px;
+            height: 112px;
             align-items: flex-start;
             justify-content: flex-start;
         }
@@ -55,6 +57,7 @@
         border-radius: 12px;
         padding: 14.5px 36px;
         background-color: #E6E6E6;
+        cursor: pointer;
 
         &:focus {
             outline: none;
@@ -101,7 +104,11 @@
     }
 
     &__image {
-        margin: 4px 8px 0 0;
+        margin: 4px 8px 4px 0;
+
+        img {
+            border-radius: 4px;
+        }
     }
 
     &__submitButtonContainer {
@@ -115,6 +122,7 @@
         background-color: #EB0C0C;
         color: white;
         border: 0;
+        cursor: pointer;
 
         &:focus {
             outline: none;
