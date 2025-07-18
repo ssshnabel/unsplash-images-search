@@ -158,7 +158,7 @@
         }
 
         &__searchInput {
-            width: 266px; 
+            width: 266px;
         }
 
         &__input {
@@ -170,14 +170,22 @@
         }
 
         &__images {
-
+            display: flex;
+            align-self: flex-start;
+            flex-wrap: wrap;
+            width: 390px;
+            min-height: 100vh;
         }
 
         &__imagesContainer {
+            width: 114px;
+            height: 114px;
         }
 
         &__image {
             img {
+                width: 114px;
+                height: 114px;
             }
         }
 

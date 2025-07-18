@@ -21,3 +21,12 @@
         height: 100%;
     }
 }
+
+
+@media (max-width: 390px) {
+    .imageWithLoader {
+        position: relative;
+        width: 114px;
+        height: 114px;
+    }
+}
