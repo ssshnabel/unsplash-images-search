@@ -116,7 +116,7 @@ const ImageSearch = () => {
 						</button>
 					</div>
 				</div>
-				{error && (
+				{error && !images.length && (
 					<div className={styles.imageSearch__searchError}>{error}</div>
 				)}
 			</div>

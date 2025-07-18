@@ -162,7 +162,7 @@
         }
 
         &__input {
-            width: 76%;
+            width: 73%;
         }
 
         &__searchError {
@@ -189,6 +189,9 @@
             }
         }
 
+        &__submitButton {
+            width: 84px;
+        }
     }
 }
 

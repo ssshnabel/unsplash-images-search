@@ -41,5 +41,24 @@
 }
 
 @media (max-width: 390px) {
-  
+  .modalWindow {
+    align-items: flex-start;
+    max-width: 390px;
+    max-height: 100%;
+
+    &__image {
+      height: 386px;
+      width: 390px;
+
+      img {
+        height: 386px;
+        width: 390px;
+      }
+    }
+
+    &__closeButton {
+      top: 16px;
+      right: 16px;
+    }
+  }
 }
