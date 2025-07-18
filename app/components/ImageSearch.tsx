@@ -50,6 +50,7 @@ const ImageSearch = () => {
 	}, [searchedImages])
 
 	const handleSearchSubmit = useCallback(() => {
+		if (images.length && !query.length) return
 		setPage(1)
 		searchImages()
 	}, [query, searchImages])

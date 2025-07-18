@@ -134,3 +134,53 @@
     }
 }
 
+@media (max-width: 390px) {
+    .imageSearch {
+        &__wrapper {
+            padding: 0 16px;
+
+            &_shifted {
+                padding: 0 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        &__searchContainer {
+            display: flex;
+            width: 358px;
+            justify-content: space-between;
+
+            &_shifted {
+                margin-bottom: 20px;
+            }
+        }
+
+        &__searchInput {
+            width: 266px; 
+        }
+
+        &__input {
+            width: 76%;
+        }
+
+        &__searchError {
+           margin-top: 20px;
+        }
+
+        &__images {
+
+        }
+
+        &__imagesContainer {
+        }
+
+        &__image {
+            img {
+            }
+        }
+
+    }
+}
+
