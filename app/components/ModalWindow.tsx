@@ -11,8 +11,6 @@ interface ModalWindowProps {
     onClose: () => void
 }
 
-/*TODO: добавить стили (сафари ios), тесты */
-
 const ModalWindow = (props: ModalWindowProps) => {
 	const {image, onClose} = props
 

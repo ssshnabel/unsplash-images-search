@@ -16,8 +16,6 @@ import {v4 as uuidv4} from "uuid"
 const IMAGE_WIDTH = 204.17
 const IMAGE_HEIGHT = 204
 
-/* TODO: стили (сафари ios), тесты */
-
 const ImageSearch = () => {
 	const [query, setQuery] = useState<string>("")
 	const [page, setPage] = useState<number>(1)
